@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import Flight
 
-# Register your models here.
+
+class FlightAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'notes')
+    ordering = ('-date',)
+
+admin.site.register(Flight, FlightAdmin)
+
