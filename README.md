@@ -1,4 +1,6 @@
-# flyguy service
+# Flyguy Service
+
+A project to keep track of my mini quad flights
 
 ## Build & development
 
