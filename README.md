@@ -1,4 +1,5 @@
 # Flyguy Service
+[![Build Status](https://travis-ci.org/ademuk/flyguy-service.svg?branch=master)](https://travis-ci.org/ademuk/flyguy-service)
 
 A project to keep track of my mini quad flights
 
