@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     flights = serializers.PrimaryKeyRelatedField(many=True, queryset=Flight.objects.all())
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('id', 'username', 'flights')
 
 class FlightSerializer(serializers.HyperlinkedModelSerializer):
