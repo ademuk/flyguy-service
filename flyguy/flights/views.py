@@ -1,6 +1,12 @@
+from rest_framework import viewsets, generics
+from rest_framework.permissions import AllowAny
 from .models import Flight
-from rest_framework import viewsets
-from .serializers import FlightSerializer
+from .serializers import UserSerializer, FlightSerializer
+
+
+class UserCreateView(generics.CreateAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
 
 
 class FlightViewSet(viewsets.ModelViewSet):

@@ -9,4 +9,5 @@ router.register(r'flights', views.FlightViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'', include(router.urls)),
+    url(r'^users/$', views.UserCreateView.as_view()),
 ]
