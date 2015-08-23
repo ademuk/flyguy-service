@@ -25,4 +25,4 @@ class FlightViewSet(viewsets.ModelViewSet):
         return Flight.objects.filter(owner=user)
 
     def perform_create(self, serializer):
-    	serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user)

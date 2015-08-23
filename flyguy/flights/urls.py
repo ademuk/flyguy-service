@@ -10,4 +10,5 @@ router.register(r'flights', views.FlightViewSet)
 urlpatterns = [
     url(r'', include(router.urls)),
     url(r'^users/$', views.UserCreateView.as_view()),
+    url(r'^email_confirmation/', include('email_confirm_la.urls')),
 ]

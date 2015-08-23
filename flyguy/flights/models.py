@@ -4,7 +4,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, \
-	PermissionsMixin
+    PermissionsMixin
+from django.dispatch import receiver
+from email_confirm_la.models import EmailConfirmation
+from email_confirm_la.signals import post_email_confirm
 
 class Flight(models.Model):
     name = models.CharField(max_length=255)
@@ -19,7 +22,7 @@ class Flight(models.Model):
 class UserManager(BaseUserManager):
 
     def _create_user(self, email, password,
-                     is_staff, is_superuser, **extra_fields):
+                     is_staff, is_superuser, is_active, **extra_fields):
         """
         Creates and saves a User with the given email and password.
         """
@@ -36,11 +39,21 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
-        return self._create_user(email, password, False, False,
+        return self._create_user(email, password, False, False, True
                                  **extra_fields)
 
+    def create_inactive_user(self, email, password=None, **extra_fields):
+        user =  self._create_user(email, password, False, False, False,
+                                 **extra_fields)
+        email_confirmation = EmailConfirmation.objects.set_email_for_object(
+            email=email,
+            content_object=user,
+        )
+
+        return user
+
     def create_superuser(self, email, password, **extra_fields):
-        return self._create_user(email, password, True, True,
+        return self._create_user(email, password, True, True, True
                                  **extra_fields)
 
 
@@ -94,3 +107,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+@receiver(post_email_confirm)
+def post_email_confirm_callback(sender, confirmation, **kwargs):
+    model_instance = confirmation.content_object
+
+    model_instance.is_active = True
+    model_instance.save()

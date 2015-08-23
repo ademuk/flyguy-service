@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'email_confirm_la',
     'flyguy.flights',
 )
 
@@ -122,3 +123,7 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:9000',
     'ademuk.github.io'
 )
+
+EMAIL_CONFIRM_LA_DOMAIN = 'flyguy-service.appyharry.com'
+EMAIL_CONFIRM_LA_SAVE_EMAIL_TO_INSTANCE = False
+DEFAULT_FROM_EMAIL = 'confirm-email@' + EMAIL_CONFIRM_LA_DOMAIN
