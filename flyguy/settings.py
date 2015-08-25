@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -79,8 +80,6 @@ WSGI_APPLICATION = 'flyguy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-import dj_database_url
-
 DATABASES = {
     'default': dj_database_url.config()
 }
@@ -127,3 +126,8 @@ CORS_ORIGIN_WHITELIST = (
 EMAIL_CONFIRM_LA_DOMAIN = 'flyguy-service.appyharry.com'
 EMAIL_CONFIRM_LA_SAVE_EMAIL_TO_INSTANCE = False
 DEFAULT_FROM_EMAIL = 'confirm-email@' + EMAIL_CONFIRM_LA_DOMAIN
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')

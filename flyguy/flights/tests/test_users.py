@@ -26,8 +26,8 @@ class UserTestCase(APILiveServerTestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_user_sends_confirmation_email(self):
-        """"""
-        response = self.client.post('/api/users/', {
+        """new users gets sent conformation email on register"""
+        self.client.post('/api/users/', {
             'email': 'foo@bar.com',
             'password': 'foo',
             'first_name': 'foo',
@@ -35,8 +35,10 @@ class UserTestCase(APILiveServerTestCase):
         })
 
         self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ['foo@bar.com'])
+        self.assertEqual(mail.outbox[0].subject,
+                         'Email confirmation for foo@bar.com')
 
-        self.assertEqual(mail.outbox[0].subject, 'Email confirmation for foo@bar.com')
 
-
-UserTestCase = override_settings(EMAIL_CONFIRM_LA_EMAIL_BACKEND=settings.EMAIL_BACKEND)(UserTestCase)
+UserTestCase = \
+    override_settings(EMAIL_CONFIRM_LA_EMAIL_BACKEND=settings.EMAIL_BACKEND)(UserTestCase)

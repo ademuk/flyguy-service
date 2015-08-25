@@ -10,5 +10,6 @@ router.register(r'flights', views.FlightViewSet)
 urlpatterns = [
     url(r'', include(router.urls)),
     url(r'^users/$', views.UserCreateView.as_view()),
-    url(r'^email_confirmation/', include('email_confirm_la.urls')),
+    url(r'^token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
+    url(r'^email-confirmation/', include('email_confirm_la.urls')),
 ]

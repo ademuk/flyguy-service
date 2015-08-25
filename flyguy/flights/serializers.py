@@ -6,13 +6,13 @@ from .models import Flight
 
 
 class UserSerializer(serializers.ModelSerializer):
-    flights = serializers.PrimaryKeyRelatedField(many=True, queryset=Flight.objects.all())
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'email', 'password', 'first_name', 'last_name', 'flights')
+        fields = ('id', 'email', 'password', 'first_name', 'last_name',
+                  'flights')
         write_only_fields = ('password',)
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'flights',)
 
     def create(self, validated_data):
         User = get_user_model()

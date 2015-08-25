@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from email_confirm_la.models import EmailConfirmation
 from email_confirm_la.signals import post_email_confirm
 
+
 class Flight(models.Model):
     name = models.CharField(max_length=255)
     date = models.DateField()
@@ -31,7 +32,7 @@ class UserManager(BaseUserManager):
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
         user = self.model(email=email,
-                          is_staff=is_staff, is_active=True,
+                          is_staff=is_staff, is_active=is_active,
                           is_superuser=is_superuser,
                           date_joined=now, **extra_fields)
         user.set_password(password)
@@ -39,13 +40,13 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
-        return self._create_user(email, password, False, False, True
+        return self._create_user(email, password, False, False, True,
                                  **extra_fields)
 
     def create_inactive_user(self, email, password=None, **extra_fields):
-        user =  self._create_user(email, password, False, False, False,
+        user = self._create_user(email, password, False, False, False,
                                  **extra_fields)
-        email_confirmation = EmailConfirmation.objects.set_email_for_object(
+        EmailConfirmation.objects.set_email_for_object(
             email=email,
             content_object=user,
         )
@@ -53,7 +54,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-        return self._create_user(email, password, True, True, True
+        return self._create_user(email, password, True, True, True,
                                  **extra_fields)
 
 
