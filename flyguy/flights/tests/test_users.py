@@ -37,7 +37,7 @@ class UserTestCase(APILiveServerTestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, ['foo@bar.com'])
         self.assertEqual(mail.outbox[0].subject,
-                         'Email confirmation for foo@bar.com')
+                         'Welcome to Flyguy foo')
 
 
 UserTestCase = \
