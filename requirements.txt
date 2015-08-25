@@ -8,3 +8,4 @@ django-cors-headers==1.1.0
 django-email-confirm-la==0.2.3
 djangorestframework-jwt==1.5.0
 Markdown==2.6.2
+BeautifulSoup==3.2.1
