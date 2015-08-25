@@ -1,4 +1,4 @@
 {% load i18n %}
-
-<p>Your registered email is {{ email }}, click the link below to confirm:</p>
+<p>Hi {{ user.get_full_name }},</p>
+<p>Your registered email is {{ email }}, click the link below to confirm it.</p>
 <p><a href="{{ confirmation_url }}">{{ confirmation_url }}</a></p>

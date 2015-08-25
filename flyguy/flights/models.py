@@ -49,6 +49,7 @@ class UserManager(BaseUserManager):
         EmailConfirmation.objects.set_email_for_object(
             email=email,
             content_object=user,
+            template_context={'user': user}
         )
 
         return user
