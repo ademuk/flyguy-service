@@ -1,3 +1,0 @@
-{% load i18n %}
-
-{% blocktrans %}Welcome to Flyguy {{ user.first_name }}{% endblocktrans %}

@@ -40,8 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'email_confirm_la',
     'flyguy.flights',
+    'email_confirm_la',
 )
 
 MIDDLEWARE_CLASSES = (
