@@ -10,3 +10,7 @@ Run `honcho run python manage.py runserver` for preview.
 ## Testing
 
 Running `honcho run python manage.py test` will run the unit tests.
+
+## Client
+
+Project for AngularJS client: https://github.com/ademuk/flyguy
