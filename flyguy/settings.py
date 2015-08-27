@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import datetime
 import dj_database_url
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -124,6 +125,10 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:9000',
     'ademuk.github.io'
 )
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
 
 EMAIL_CONFIRM_LA_DOMAIN = 'flyguy-service.appyharry.com'
 EMAIL_CONFIRM_LA_SAVE_EMAIL_TO_INSTANCE = False
