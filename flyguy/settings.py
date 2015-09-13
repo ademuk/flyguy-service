@@ -123,6 +123,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:9000',
+    'localhost:3000',
     'ademuk.github.io'
 )
 
